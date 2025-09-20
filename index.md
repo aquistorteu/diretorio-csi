@@ -1,4 +1,4 @@
-# DIRETÓRIO DE CSI DA PAN
+# COMPÊNDIO DE BANNERS DOS CSI JOGADOS NA PAN
 
 # A
 1.   [AESPA](https://i.imgur.com/bDhQx7f.jpg)
