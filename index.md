@@ -1,4 +1,21 @@
-# COMPÊNDIO DE BANNERS DOS CSI JOGADOS NA PAN
+# CSI-PAN
+
+### MAIS POPULARES
+
+- [PARAÍSO DO DEMÔNIO](https://imgur.com/CYz6ptj)
+- [LOBO MENTIROSO](https://i.imgur.com/4hqTdON.jpg)
+- [RICHTÓRFÃOS](https://imgur.com/a/CFulSmJ)
+- [CIRCUS](https://imgur.com/a/WoFEqZR)
+- [MITOLOGIA](https://i.imgur.com/5QYhfi6.jpg)
+- [MONTE OLIMPO](https://i.imgur.com/RoFDXyp.jpg)
+- [MEDIEVAL](https://i.imgur.com/Fl969ei.jpg)
+- [NATAL MACABRO](https://imgur.com/Xy5ejp6)
+- [TIRO DE JANEIRO](https://i.imgur.com/GUfP0pk.jpg)
+- [DARK PHOENIX](https://imgur.com/a/IYMguZV)
+- [SIN CITY - 3.0 Original Sin](https://i.imgur.com/bR4DmPG.jpg)
+- [AVATAR - Reloaded](https://imgur.com/a/46OMGFA)
+- [GOTHAM](https://i.imgur.com/sBrONft.jpg)
+- [HALLOWEEN](https://i.imgur.com/eX1Il5I.png)
 
 # A
 1.   [AESPA](https://i.imgur.com/bDhQx7f.jpg)
