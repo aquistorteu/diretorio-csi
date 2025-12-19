@@ -35,6 +35,7 @@
 13.   [CONFRONTO MÁGICO](https://i.imgur.com/qCdlS6R.jpg)
 14.   [CONTO DE FADAS](https://i.imgur.com/Bm2m9F8.jpg)
 15.   [COVEN](https://imgur.com/a/6X85SjA)
+16.   [CYBERPUNK](https://imgur.com/a/rULVY71)
 
 # D
 16.   [DARK PHOENIX](https://imgur.com/a/IYMguZV)
