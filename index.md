@@ -35,7 +35,7 @@
 13.   [CONFRONTO MÁGICO](https://i.imgur.com/qCdlS6R.jpg)
 14.   [CONTO DE FADAS](https://i.imgur.com/Bm2m9F8.jpg)
 15.   [COVEN](https://imgur.com/a/6X85SjA)
-16.   [CYBERPUNK](https://imgur.com/a/rULVY71)
+16.   [CYBERPUNK](https://i.imgur.com/KbaM8kr.jpeg)
 
 # D
 16.   [DARK PHOENIX](https://imgur.com/a/IYMguZV)
@@ -108,7 +108,7 @@
 61.   [POWERPUFF GIRLS](https://i.imgur.com/R4i1idH.png)
 
 # R
-62.   [RICHTÓRFÃOS](https://imgur.com/a/CFulSmJ)
+62.   [RICHTHÓRFÃOS](https://imgur.com/a/lHn0Yo0)
 
 # S
 63.   [SCREAM](https://i.imgur.com/cO5Hxbl.png)
