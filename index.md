@@ -30,12 +30,12 @@
 8.    [CÂMARA SECRETA](https://i.imgur.com/PqH6MQm.jpg)
 9.    [CASA MALDITA](https://i.imgur.com/16SaDqR.gif)
 10.   [CASAMENTO SANGRENTO](https://imgur.com/a/8Nj8TTp)
-11.   [CHAVES 2.0](https://imgur.com/a/myvmsHV)
-12.   [CIRCUS](https://imgur.com/a/WoFEqZR)
-13.   [CONFRONTO MÁGICO](https://i.imgur.com/qCdlS6R.jpg)
-14.   [CONTO DE FADAS](https://i.imgur.com/Bm2m9F8.jpg)
-15.   [COVEN](https://imgur.com/a/6X85SjA)
-16.   [CYBERPUNK](https://i.imgur.com/KbaM8kr.jpeg)
+11.   [CHAVES 2.0](https://imgur.com/a/IwTwKrp)
+13.   [CIRCUS](https://imgur.com/a/WoFEqZR)
+14.   [CONFRONTO MÁGICO](https://i.imgur.com/qCdlS6R.jpg)
+15.   [CONTO DE FADAS](https://i.imgur.com/Bm2m9F8.jpg)
+16.   [COVEN](https://imgur.com/a/6X85SjA)
+17.   [CYBERPUNK](https://i.imgur.com/KbaM8kr.jpeg)
 
 # D
 16.   [DARK PHOENIX](https://imgur.com/a/IYMguZV)
