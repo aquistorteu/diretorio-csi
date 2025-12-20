@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria CSI</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Container da grade */
+        .gallery-container {
+            display: grid;
+            /* Cria colunas automáticas com largura mínima de 140px */
+            grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* O Card Individual */
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.7);
+            z-index: 10;
+        }
+
+        /* Área da Imagem - Proporção Retrato (9:16) */
+        .image-wrapper {
+            width: 100%;
+            padding-top: 177.77%; /* Isso força a proporção 16:9 vertical (9:16) */
+            position: relative;
+        }
+
+        .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+            display: block;
+        }
+
+        /* Legenda ao passar o mouse (Opcional) */
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+            /*opacity: 0;*/
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gallery-item:hover .caption {
+            /*opacity: 1;*/
+            background: hsla(285deg, 95%, 20%, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Galeria CSI</h1>
+    <div class="gallery-container" id="gallery">
+        <!-- Os itens serão inseridos aqui via JavaScript -->
+    </div>
+
+<script>
+    // 1. Dados dos Links (CSI FILES)
+    const files = {
+      "AESPA": "https://i.imgur.com/bDhQx7f.jpg",
+      "ANIME": "https://i.imgur.com/dbnJFUl.mp4",
+      "ASYLUM": "https://i.imgur.com/6KsssgN.png",
+      "ATTACK ON TITAN": "https://imgur.com/a/CXe4zgm",
+      "AVATAR - Original": "https://i.imgur.com/exsC0qb.jpg",
+      "AVATAR - Versão 2.0": "https://i.imgur.com/exsC0qb.jpg",
+      "AVATAR - Reloaded": "https://imgur.com/a/46OMGFA",
+      "CÂMARA SECRETA": "https://i.imgur.com/PqH6MQm.jpg",
+      "CASA MALDITA": "https://i.imgur.com/16SaDqR.gif",
+      "CASAMENTO SANGRENTO": "https://imgur.com/a/8Nj8TTp",
+      "CHAVES 2.0": "https://imgur.com/a/IwTwKrp",
+      "CIRCUS": "https://imgur.com/a/WoFEqZR",
+      "CONFRONTO MÁGICO": "https://i.imgur.com/qCdlS6R.jpg",
+      "CONTO DE FADAS": "https://i.imgur.com/Bm2m9F8.jpg",
+      "COVEN": "https://imgur.com/a/6X85SjA",
+      "CYBERPUNK": "https://i.imgur.com/KbaM8kr.jpeg",
+      "DARK PHOENIX": "https://imgur.com/a/IYMguZV",
+      "DEEWAS": "https://i.imgur.com/n2i7fR1.png",
+      "DETETIVE": "https://imgur.com/a/gFE3ShB",
+      "DIVAS CHERNOBYL": "https://i.imgur.com/Byw0UXa.jpg",
+      "DRAG RACE": "https://i.imgur.com/oTyBDtX.jpg",
+      "DREAM GIRLS": "https://i.imgur.com/klPnsF0.jpg",
+      "FESTA NA CALUNGA": "https://i.imgur.com/DHGYLGz.png",
+      "FIRE EMBLEM": "https://i.imgur.com/hSLBHV5.png",
+      "GOLPE": "https://imgur.com/a/XyarOQH",
+      "GOTHAM": "https://i.imgur.com/sBrONft.jpg",
+      "GOTHAM BATMAN BEYOND": "https://i.imgur.com/LiPm6YX.jpg",
+      "GUERRA SANTA": "https://imgur.com/a/DB2UNVL",
+      "GUERRAS CIVIS (ORIGINAL)": "https://i.imgur.com/2jI4IOq.png",
+      "GUERRAS CIVIS (CONTO DE FADAS)": "https://i.imgur.com/QRQPIlp.jpg",
+      "HALLOWEEN": "https://i.imgur.com/eX1Il5I.png",
+      "HANNA BARBERA": "https://i.imgur.com/iGgsRA3.jpg",
+      "IDADE MÉDIA": "https://i.imgur.com/aqy5SZB.jpg",
+      "IMPOSTOR": "https://i.imgur.com/XiJbuW9.png",
+      "JACKIE CHAN": "https://i.imgur.com/cOSv2ju.png",
+      "JOLLY ROGERS ORIGINAL": "https://i.imgur.com/AXFbGWE.jpg",
+      "JOLLY ROGERS 2.0": "https://imgur.com/a/p4U8KzT",
+      "KALUNGA": "https://i.imgur.com/AAiD7Vm.png",
+      "LEAGUE OF LEGENDS": "https://i.imgur.com/Yw51dWu.png",
+      "LEFT FOR DEAD": "https://i.imgur.com/x3fm9Ph.png",
+      "LOBO MENTIROSO": "https://i.imgur.com/4hqTdON.jpg",
+      "LOST PROJECT DHARMA": "https://i.imgur.com/lIA5TyI.png",
+      "MATA MATA": "https://i.imgur.com/uQo5yvC.png",
+      "MEDIEVAL": "https://i.imgur.com/Fl969ei.jpg",
+      "MITOLOGIA": "https://i.imgur.com/5QYhfi6.jpg",
+      "MITOLOGIA ORIGINAL": "https://imgur.com/a/RadYRwy",
+      "MONTE OLIMPO": "https://i.imgur.com/RoFDXyp.jpg",
+      "MYERS BRIGGS": "https://i.imgur.com/XxpZSl3.png",
+      "MYSTIC FALLS": "https://i.imgur.com/j6qhdam.gif",
+      "NATAL MACABRO": "https://imgur.com/Xy5ejp6",
+      "NIKOLAI GUERRA INFINITA": "https://i.imgur.com/qlsCAkL.png",
+      "NOITE MACABRA": "https://imgur.com/dizD5mZ",
+      "NOVA ORDEM MUNDIAL": "https://imgur.com/a/cixJHLi",
+      "OCEAN": "https://imgur.com/0Jz8aqN",
+      "PALAVRAS DE STOLAS": "https://i.imgur.com/kOaPpGz.png",
+      "PAN": "https://imgur.com/a/RAK5vXm",
+      "PANDEMIA": "https://i.imgur.com/6VXbo21.jpg",
+      "PARAÍSO DO DEMÔNIO": "https://imgur.com/CYz6ptj",
+      "PARAÍSO DO DEMÔNIO 2.0": "https://imgur.com/a/2QAu82L",
+      "POCKET": "https://i.imgur.com/RRyNfrg.jpg",
+      "POKÉMON": "https://i.imgur.com/zQCCuxV.png",
+      "POWERPUFF GIRLS": "https://i.imgur.com/R4i1idH.png",
+      "RICHTHÓRFÃOS": "https://imgur.com/a/lHn0Yo0",
+      "SCREAM": "https://i.imgur.com/cO5Hxbl.png",
+      "SERIAL KILLER": "https://imgur.com/a/LPCCAe7",
+      "SIGNOS": "https://i.imgur.com/HXQNEwG.jpg",
+      "SIN CITY - 1.0 Primeira versão": "https://i.imgur.com/sSSzNS1.jpg",
+      "SIN CITY - 2.0 Rebirth": "https://i.imgur.com/EvB6dli.jpg",
+      "SIN CITY - 3.0 Original Sin": "https://i.imgur.com/bR4DmPG.jpg",
+      "SCREAM QUEENS": "https://imgur.com/a/VB70clx",
+      "STEVEN UNIVERSO": "https://imgur.com/a/hsLt3uk",
+      "SUPER MARIO WORLD": "https://imgur.com/a/y7qLbTo",
+      "SWAN LAKE": "https://i.imgur.com/rlmI3kO.jpg",
+      "TEEN TITANS": "https://i.imgur.com/Oze3epz.png",
+      "TIRO DE JANEIRO": "https://i.imgur.com/GUfP0pk.jpg",
+      "VALENTINE'S DAY": "https://i.imgur.com/iin6vjU.jpg",
+      "X MEN EVOLUTION": "https://i.imgur.com/7rINlJk.png",
+      "ZODIAC": "https://i.imgur.com/iScoQEd.gif"
+    };
+
+    // 2. Dados das Thumbnails (CSI THUMBS)
+    const thumbs = {
+      "anime": "https://i.imgur.com/x72sC1f.png",
+      "aespa": "https://i.imgur.com/LRb69Ik.png",
+      "asylum": "https://i.imgur.com/gkOSzUD.png",
+      "attack on titan": "https://i.imgur.com/TlgfWv1.png",
+      "avatar original": "https://i.imgur.com/caKNaJk.png",
+      "avatar original 2": "https://i.imgur.com/Xiq5San.png",
+      "avatar reloaded": "https://i.imgur.com/Oxb5QCW.png",
+      "camara secreta": "https://i.imgur.com/GeDk2in.png",
+      "casa maldita": "https://i.imgur.com/uJXYqmI.png",
+      "casamento sangrento": "https://i.imgur.com/udgknsj.png",
+      "chaves": "https://i.imgur.com/KGaAIjh.png",
+      "circus": "https://i.imgur.com/bHE66XR.png",
+      "confronto mágico": "https://i.imgur.com/9C22iwy.png",
+      "conto de fadas": "https://i.imgur.com/ybfyGeA.png",
+      "coven": "https://i.imgur.com/hly1QIv.png",
+      "dark phoenix": "https://i.imgur.com/8qS4fPd.png",
+      "Deewas": "https://i.imgur.com/hUA7EiS.png",
+      "detetive": "https://i.imgur.com/6nnmzGo.png",
+      "divas chernobyl": "https://i.imgur.com/GjITBIz.png",
+      "rupauls": "https://i.imgur.com/5hCmX0y.png",
+      "festa na calunga": "https://i.imgur.com/DKJ8FGX.png",
+      "fire emblem": "https://i.imgur.com/drtZlJj.png",
+      "golpe": "https://i.imgur.com/NcUmihh.png",
+      "gotham": "https://i.imgur.com/7irQLG5.png",
+      "guerra santa": "https://i.imgur.com/K7FYCCA.png",
+      "gotham batman beyond": "https://i.imgur.com/YIkGH6A.png",
+      "guerras civis": "https://i.imgur.com/En90zaS.png",
+      "guerras civis - contos de fadas": "https://i.imgur.com/VxU6byA.png",
+      "halloween": "https://i.imgur.com/R4Zzire.png",
+      "Hanna Barbera": "https://i.imgur.com/WW5ypbM.png",
+      "idade média": "https://i.imgur.com/QSoAVAQ.png",
+      "impostor": "https://i.imgur.com/0JbPGIc.png",
+      "Jackie Chan": "https://i.imgur.com/eycKequ.png",
+      "kalunga": "https://i.imgur.com/IvegsR1.png",
+      "jolly rogers II": "https://i.imgur.com/GT5aXHq.png",
+      "jolly rogers I": "https://i.imgur.com/mQxKmGS.png",
+      "league of legends": "https://i.imgur.com/n6wSM7Z.png",
+      "left 4 dead": "https://i.imgur.com/oWbbrHK.png",
+      "lobo mentiroso": "https://i.imgur.com/oOMzY5H.png",
+      "lost": "https://i.imgur.com/7PkoqIX.png",
+      "mata-mata": "https://i.imgur.com/fbWUcHn.png",
+      "mitologia": "https://i.imgur.com/MLxfRC4.png",
+      "medieval": "https://i.imgur.com/DTNPUOb.png",
+      "mitologia original": "https://i.imgur.com/IyTAvea.png",
+      "mystic falls": "https://i.imgur.com/iTdcOcl.png",
+      "Monte Olimpo": "https://i.imgur.com/72e1nhP.png",
+      "Myers Briggs": "https://i.imgur.com/H12F9Yd.png",
+      "Natal Macabro": "https://i.imgur.com/j8ZVu7I.png",
+      "Ocean": "https://i.imgur.com/58VPtl1.png",
+      "Nova Ordem Mundial": "https://i.imgur.com/eRfyKug.png",
+      "Noite Macabra": "https://i.imgur.com/DBlUyL8.png",
+      "Nikolai": "https://i.imgur.com/jTAOdWr.png",
+      "palavras de stolas": "https://i.imgur.com/Y1c49Tt.png",
+      "pan": "https://i.imgur.com/2KlKQbN.png",
+      "pandemia": "https://i.imgur.com/0VqeQfe.png",
+      "paraíso II": "https://i.imgur.com/ZEXDV4g.png",
+      "pocket": "https://i.imgur.com/UZ6zFZw.png",
+      "pokemon": "https://i.imgur.com/25uNM7C.png",
+      "paraíso do demonio": "https://i.imgur.com/eSp7NoQ.png",
+      "powerpuff girls": "https://i.imgur.com/VzmirhF.png",
+      "richthórfãos": "https://i.imgur.com/ePyT8UT.png",
+      "cyberpunk": "https://i.imgur.com/dSDuKc3.png",
+      "swan lake": "https://i.imgur.com/rwcFzdb.png",
+      "mario": "https://i.imgur.com/lfIYY6b.png",
+      "steven universo": "https://i.imgur.com/fZUi3VB.png",
+      "scream queens": "https://i.imgur.com/AfZ3RRD.png",
+      "sin city original sin": "https://i.imgur.com/wVoAVdV.png",
+      "sin city rebirth": "https://i.imgur.com/VOJK10a.png",
+      "sin city original": "https://i.imgur.com/PayIIjm.png",
+      "signos": "https://i.imgur.com/PKkF17I.png",
+      "scream": "https://i.imgur.com/tYtSP8L.png",
+      "serial killer": "https://i.imgur.com/TzAafDn.png",
+      "zodiac": "https://i.imgur.com/bbRK2at.png",
+      "x men evolution": "https://i.imgur.com/Cr8RY3S.png",
+      "valentine's day": "https://i.imgur.com/JpmOw0b.png",
+      "tiro de janeiro": "https://i.imgur.com/D0Jkk9K.png",
+      "teen titans": "https://i.imgur.com/jpA064H.png"
+    };
+
+    // Mapa manual para corrigir nomes que são muito diferentes entre os dois arquivos
+    const manualMapping = {
+        "AVATAR - Versão 2.0": "avatar original 2",
+        "CHAVES 2.0": "chaves",
+        "DRAG RACE": "rupauls",
+        "GUERRAS CIVIS (ORIGINAL)": "guerras civis",
+        "GUERRAS CIVIS (CONTO DE FADAS)": "guerras civis - contos de fadas",
+        "JOLLY ROGERS ORIGINAL": "jolly rogers I",
+        "JOLLY ROGERS 2.0": "jolly rogers II",
+        "LEFT FOR DEAD": "left 4 dead",
+        "LOST PROJECT DHARMA": "lost",
+        "NIKOLAI GUERRA INFINITA": "Nikolai",
+        "PARAÍSO DO DEMÔNIO 2.0": "paraíso II",
+        "SIN CITY - 1.0 Primeira versão": "sin city original",
+        "SIN CITY - 2.0 Rebirth": "sin city rebirth",
+        "SIN CITY - 3.0 Original Sin": "sin city original sin",
+        "SUPER MARIO WORLD": "mario"
+    };
+
+    const galleryElement = document.getElementById('gallery');
+
+    // Normaliza strings para comparação (remove acentos e lowercase)
+    function normalize(str) {
+        return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    }
+
+    // Loop através dos ARQUIVOS (que contêm os links de destino)
+    for (const [name, link] of Object.entries(files)) {
+        
+        let thumbUrl = null;
+
+        // 1. Tenta achar pelo mapa manual primeiro
+        if (manualMapping[name] && thumbs[manualMapping[name]]) {
+            thumbUrl = thumbs[manualMapping[name]];
+        } 
+        // 2. Tenta achar por correspondência exata (case insensitive)
+        else {
+            const normalizedFileName = normalize(name);
+            
+            // Procura uma chave no objeto thumbs que bata com o nome normalizado
+            const matchKey = Object.keys(thumbs).find(key => normalize(key) === normalizedFileName);
+            
+            if (matchKey) {
+                thumbUrl = thumbs[matchKey];
+            }
+        }
+
+        // Se encontrou uma thumbnail correspondente, cria o card
+        if (thumbUrl) {
+            const anchor = document.createElement('a');
+            anchor.className = 'gallery-item';
+            anchor.href = link;
+            anchor.target = '_blank'; // Abre em nova aba
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'image-wrapper';
+
+            const img = document.createElement('img');
+            img.src = thumbUrl;
+            img.alt = name;
+            img.loading = "lazy"; // Carregamento otimizado
+
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.innerText = name;
+
+            wrapper.appendChild(img);
+            anchor.appendChild(wrapper);
+            anchor.appendChild(caption);
+            galleryElement.appendChild(anchor);
+        }
+    }
+</script>
+
+</body>
+</html>
