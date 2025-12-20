@@ -92,7 +92,7 @@
 </head>
 <body>
 
-    <h1>Galeria CSI</h1>
+    <h1 id="title">Galeria CSI</h1>
     <div class="gallery-container" id="gallery">
         <!-- Os itens serão inseridos aqui via JavaScript -->
     </div>
@@ -105,7 +105,6 @@
       "ASYLUM": "https://i.imgur.com/6KsssgN.png",
       "ATTACK ON TITAN": "https://imgur.com/a/CXe4zgm",
       "AVATAR - Original": "https://i.imgur.com/exsC0qb.jpg",
-      "AVATAR - Versão 2.0": "https://i.imgur.com/exsC0qb.jpg",
       "AVATAR - Reloaded": "https://imgur.com/a/46OMGFA",
       "CÂMARA SECRETA": "https://i.imgur.com/PqH6MQm.jpg",
       "CASA MALDITA": "https://i.imgur.com/16SaDqR.gif",
@@ -142,7 +141,7 @@
       "LEFT FOR DEAD": "https://i.imgur.com/x3fm9Ph.png",
       "LOBO MENTIROSO": "https://i.imgur.com/4hqTdON.jpg",
       "LOST PROJECT DHARMA": "https://i.imgur.com/lIA5TyI.png",
-      "MATA MATA": "https://i.imgur.com/uQo5yvC.png",
+      "MATA-MATA": "https://i.imgur.com/uQo5yvC.png",
       "MEDIEVAL": "https://i.imgur.com/Fl969ei.jpg",
       "MITOLOGIA": "https://i.imgur.com/5QYhfi6.jpg",
       "MITOLOGIA ORIGINAL": "https://imgur.com/a/RadYRwy",
@@ -154,7 +153,7 @@
       "NOITE MACABRA": "https://imgur.com/dizD5mZ",
       "NOVA ORDEM MUNDIAL": "https://imgur.com/a/cixJHLi",
       "OCEAN": "https://imgur.com/0Jz8aqN",
-      "PALAVRAS DE STOLAS": "https://i.imgur.com/kOaPpGz.png",
+      "PALAVRAS DE STOLAS (ncsi)": "https://i.imgur.com/kOaPpGz.png",
       "PAN": "https://imgur.com/a/RAK5vXm",
       "PANDEMIA": "https://i.imgur.com/6VXbo21.jpg",
       "PARAÍSO DO DEMÔNIO": "https://imgur.com/CYz6ptj",
@@ -187,7 +186,6 @@
       "asylum": "https://i.imgur.com/gkOSzUD.png",
       "attack on titan": "https://i.imgur.com/TlgfWv1.png",
       "avatar original": "https://i.imgur.com/caKNaJk.png",
-      "avatar original 2": "https://i.imgur.com/Xiq5San.png",
       "avatar reloaded": "https://i.imgur.com/Oxb5QCW.png",
       "camara secreta": "https://i.imgur.com/GeDk2in.png",
       "casa maldita": "https://i.imgur.com/uJXYqmI.png",
@@ -263,7 +261,8 @@
 
     // Mapa manual para corrigir nomes que são muito diferentes entre os dois arquivos
     const manualMapping = {
-        "AVATAR - Versão 2.0": "avatar original 2",
+        "AVATAR - Original": "avatar original",
+        "AVATAR - Reloaded": "avatar reloaded",
         "CHAVES 2.0": "chaves",
         "DRAG RACE": "rupauls",
         "GUERRAS CIVIS (ORIGINAL)": "guerras civis",
@@ -333,6 +332,12 @@
             galleryElement.appendChild(anchor);
         }
     }
+
+
+    (function() {
+        let titleNode = document.getElementById("title");
+        titleNode.innerText += ` (Contagem: ${Array.from(document.querySelectorAll(".caption")).length})`;
+    })();
 </script>
 
 </body>
